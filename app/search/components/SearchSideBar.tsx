@@ -16,9 +16,7 @@ interface Props {
     }
 }
 
-async function SearchSideBar({ cuisines, regions, searchParams }: Props) {
-    console.log(regions);
-    
+function SearchSideBar({ cuisines, regions, searchParams }: Props) {    
 
     return (
         <div className="sm:w-1/5 sm:block flex flex-wrap w-full justify-center">
