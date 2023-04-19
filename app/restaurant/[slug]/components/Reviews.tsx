@@ -1,0 +1,57 @@
+import { Review } from '@prisma/client'
+import React from 'react'
+import CalculateRatingsToStars from '../../../../utils/calculateRatingsToStars';
+
+function Reviews({ reviews }: { reviews: Review[] }) {
+
+    function getCredentials(firstName: string, lastName: string) {
+        const credentials = `${firstName.charAt(0).toUpperCase()}${lastName.charAt(0).toUpperCase()}`;
+        return credentials;
+    }
+
+    if (reviews.length === 0) {
+        return (
+            <h1 className="font-bold text-3xl mt-10 mb-7 borber-b pb-5">
+                This Restaurant does not have any reviews yet...
+            </h1>
+        )
+    }
+
+    return (
+        <div>
+            <h1 className="font-bold text-3xl mt-10 mb-7 borber-b pb-5">
+                {`What ${reviews.length} ${reviews.length === 1 ? 'person is' : 'people are'} saying`}
+            </h1>
+            <div>
+                {reviews.map(review => (
+                    <div className="border-b pb-7 mb-7" key={review.id}>
+                        <div className="flex">
+                            <div className="w-1/6 flex flex-col items-center">
+                                <div
+                                    className="rounded-full bg-blue-400 w-16 h-16 flex items-center justify-center"
+                                >
+                                    <h2 className="text-white text-2xl">
+                                        {getCredentials(review.first_name, review.last_name)}
+                                    </h2>
+                                </div>
+                                <p className="text-center">{`${review.first_name} ${review.last_name}`}</p>
+                            </div>
+                            <div className="ml-10 w-5/6">
+                                <div className="flex items-center">
+                                    <CalculateRatingsToStars rating={review.rating}/>
+                                </div>
+                                <div className="mt-5">
+                                    <p className="text-lg font-light">
+                                        {review.text}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export default Reviews

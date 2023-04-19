@@ -1,3 +1,5 @@
+import Navbar from './components/Navbar'
+import AuthContext from './context/AuthContext'
 import './globals.css'
 
 export default function RootLayout({
@@ -12,7 +14,16 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>{children}</body>
+      <body>
+        <main className="bg-gray-100 min-h-screen">
+          <AuthContext>
+            <main className="max-w-[1200px] m-auto bg-white">
+              <Navbar />
+              {children}
+            </main>
+          </AuthContext>
+        </main>
+      </body>
     </html>
   )
 }
