@@ -23,7 +23,7 @@ export default function useAuth({ endpoint, body, method }: Props) { //TODO: Cha
                 setIsLoading(true)
                 const options = {
                     method: method,
-                    url: `http://localhost:3000${endpoint}`,
+                    url: `${endpoint}`,
                     data: body
                 }
                 const { data } = await axios(options)
